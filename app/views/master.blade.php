@@ -43,15 +43,7 @@
 			@yield('content')
 		</div>
 	</div>
-	{{ HTML::script('js/vendors/jquery.min.js') }}
-	{{ HTML::script('js/vendors/bootstrap.js') }}
-	{{ HTML::script('js/vendors/underscore.js') }}
-	{{ HTML::script('js/vendors/backbone.js') }}
-	{{ HTML::script('js/main.js') }}
-	{{ HTML::script('js/router.js') }}
-	{{ HTML::script('js/models.js') }}
-	{{ HTML::script('js/collections.js') }}
-	{{ HTML::script('js/views.js') }}
+	<script data-main="scripts/app.js" src="scripts/vendors/require.js"></script>
 	
 	<script>
         $(function(){
