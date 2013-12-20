@@ -1,1 +1,1 @@
-create.blade
+create

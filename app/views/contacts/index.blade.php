@@ -1,34 +1,49 @@
 @extends('master')
+@include('form')
 
-@section('container')
-	
-			<table id="allContacts" class="module">
-				<thead>
-					<tr>
-						<td>First Name</td>
-						<td>Last Name</td>
-						<td>Email Address</td>
-						<td>Description</td>
-						<td>Options</td>
-					</tr>
-				</thead>
-			</table>
+@section('content')
+	@if ( $errors->has() )
+		<ul id="form-errors">
+			{{ $errors->first('first_name','<li>:message</li>') }}
+			{{ $errors->first('last_name','<li>:message</li>') }}
+			{{ $errors->first('phone_number','<li>:message</li>') }}
+			{{ $errors->first('email_address','<li>:message</li>') }}
+		</ul>
+	@endif
+	<div class="table-responsive">
+		<table class="table table-condensed  table-bordered text-center">
+			<thead>
+			<tr>
+				<th> First Name</th>
+				<th> Last Name</th>
+				<th> Email </th>
+				<th> Description </th>
+				<th> Option </th>
+			</tr>
+			</thead>
+			<tr>
 			
-			<script id="allContactTemplate" type="text/template">
-				<td><%= first_name %></td>
-				<td><%= last_name %></td>
-				<td><%= email_address %></td>
-				<td><%= description %></td>
-				<td><a href="#contacts/<%= id %>" class="edit">Edit</a></td>
-				<td><a href="#contacts/<%= id %>" class="delete">Delete</a></td>
-			</script>
-	{{ Form::open( array('url'=>'')) }}
-
-		{{ Form::textarea('snippet')}}
-		<div class="btn-group nav">
-			{{ Form::submit('Save',array('class'=>'btn btn-success')) }}
-		</div>
-	{{ Form::close() }}	
+			@foreach( $contacts as $contact ) 
+				 
+				<td>{{{ $contact->first_name }}}</td>
+				<td>{{{ $contact->last_name }}}</td>
+				<td>{{{ $contact->email_address }}}</td>
+				<td>{{{ $contact->description }}}</td>
+				<td> 
+					<div class="btn-group">
+						{{ HTML::linkRoute('contacts.update', 'Edit',$contact->id,array('class'=>'btn btn-primary') )}}
+					</div>
+					<div class="btn-group">
+						{{ Form::open(array('url' => 'contacts/' . $contact->id) ) }}
+							{{ Form::hidden('_method', 'DELETE') }}
+							{{ Form::submit('Delete ', array('class' => 'btn btn-warning')) }}
+						{{ Form::close() }}
+					</div>
+				</td>
+			</tr>
+			@endforeach
+		</table>
+	</div>
 @stop
 
 

@@ -11,9 +11,15 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('contacts/index');
-});
+// Route::get('/', function()
+// {
+// 	return View::make('contacts.index');
+// });
+Route::get('/', 'ContactsController@index');
 
 Route::resource('contacts', 'ContactsController');
+
+Route::get('/form', function()
+{
+	return View::make('form');
+});

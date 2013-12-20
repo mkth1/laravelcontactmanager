@@ -9,17 +9,28 @@ class ContactsController extends BaseController {
 	 */
 	public function index()
 	{
-		return Contact::all();
+		//return Contact::all();
+		$contacts = Contact::all();
+		return View::make('contacts.index')
+			->with('contacts',$contacts);
 	}
 
 	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
-	 */
-	public function create()
+	 public function create( $defaultSnippet = "" )
 	{
-		//
+		return View::make('snippets.create')
+			->with( 'snippet',$defaultSnippet);
+	}
+
+	 */
+	public function create( $contacts = "" )
+	{
+		//return View::make('contacts.create');
+		return View::make('form')
+			->with( 'contact',$contacts);
 	}
 
 	/**
@@ -29,13 +40,22 @@ class ContactsController extends BaseController {
 	 */
 	public function store()
 	{	
-		$input = Input::json()->all();
-		Contact::create([
-			'first_name' => $input->first_name,
-			'last_name' => $input->last_name,
-			'email_address' => $input->email_address,
-			'description' => $input->description,
-		]);
+		$input = Input::all();
+		//validate !!
+		$validation = Contact::validate( $input );
+
+		if ( $validation->passes() ) {
+			$newRec = Contact::create([
+				'first_name' => $input['first_name'],
+				'last_name' => $input['last_name'],
+				'email_address' => $input['email_address'],
+				'description' => $input['description']
+			]);
+
+			if ($newRec) return Redirect::to('/');
+		} else {
+			return Redirect::to('/')->withErrors($validation)->withInput();
+		}
 	}
 
 	/**
@@ -45,8 +65,16 @@ class ContactsController extends BaseController {
 	 * @return Response
 	 */
 	public function show($id)
-	{
-		return Contact::find($id);
+	{	
+
+		//return Contact::find($id);
+		$contact = Contact::find($id);
+		$contacts = Contact::all();
+		return View::make('contacts.index')
+			->with('contacts',$contacts)->with('contact', $contact->toArray());
+
+		//if ( !$contact ) return Redirect::to('contacts/create');
+		//return View::make('contacts.index')->with('contact', $contact->toArray() );
 	}
 
 	/**
@@ -69,14 +97,14 @@ class ContactsController extends BaseController {
 	public function update($id)
 	{
 		$contact = Contact::find($id);
-		$input = Input::json()->all();
+		$input = Input::all();
 
-		$contact->first_name = $input->frist_name;
-		$contact->last_name = $input->last_name;
-		$contact->email_address = $input->email_address;
-		$contact->description = $input->description;
+		$contact->first_name = $input['first_name'];
+		$contact->last_name = $input['last_name'];
+		$contact->email_address = $input['email_address'];
+		$contact->description = $input['description'];
 
-		$contact->save();
+		if ($contact->save() ) return Redirect::to('/');
 	}
 
 	/**
@@ -87,7 +115,12 @@ class ContactsController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		return Contact::find($id)->delete();
-	}
 
+		$contact = Contact::find($id);
+		$contact->delete();
+		// redirect
+		Session::flash('message', 'Successfully deleted the nerd!');
+		return Redirect::to('/');
+
+	}
 }
