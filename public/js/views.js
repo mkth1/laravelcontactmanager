@@ -1,15 +1,18 @@
-/*
-	Global App View
-*/
-App.Views.App = Backbone.View.extend({
-	initialize: function(){
-		
-		var allContactView = new App.Views.Contacts({ collection:App.contacts});
-		$('#allContacts').append(allContactView.render().el);
-	},
-});
-define(['jquery','backbone'],function($, Backbone){
+define(['jquery','backbone','bootstrap'],function($, Backbone,Bootstrap){
+	//console.log( "Jquery,Backbone", $,Backbone );
 	/* All Contact View*/
+
+	/*
+	Global App View
+	*/
+	App.Views.App = Backbone.View.extend({
+		initialize: function(){
+			
+			var allContactView = new App.Views.Contacts({ collection:App.contacts});
+			$('#allContacts').append(allContactView.render().el);
+		},
+	});
+
 	App.Views.Contacts = Backbone.View.extend({
 		tagName: 'tbody',
 

@@ -46,9 +46,9 @@
 	<script data-main="js/app.js" src="js/vendors/require.js"></script>
 	
 	<script>
-        $(function(){
+        /*$(function(){
         	$('.form-control').tooltip();
-        });
+        });*/
     </script>
 
 </body>

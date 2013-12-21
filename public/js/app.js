@@ -4,6 +4,22 @@ require.config({
         "underscore":"vendors/underscore",
         "backbone":"vendors/backbone",
         "bootstrap":"vendors/bootstrap",
+    },
+      shim: {
+        jquery: {
+            exports: '$'
+        },
+        underscore: {
+            exports: '_'
+        },
+        bootstrap: {
+            deps: ['jquery'],
+            exports: 'Bootstrap'
+        },
+        backbone: {
+            deps: ['underscore', 'jquery'],
+            exports: 'Backbone'
+        }
     }
 });
 
@@ -12,7 +28,6 @@ require(['main'], function(App){
 
 require(['router','models','views','collections'],function(Router,Models,Views,Collections){
 
-    console.log( "App", App );
     new App.Router;
     Backbone.history.start();
 

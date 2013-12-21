@@ -1,4 +1,4 @@
-define(['jquery','underscore','backbone'],function($,_,Backbone){
+define(['jquery','underscore','backbone','bootstrap'],function($,_,Backbone,Bootstrap){
     (function() {
         window.App = {
             Models: {},
@@ -10,7 +10,9 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
         window.vent = _.extend({}, Backbone.Events);
 
         window.template = function(id){
-            return _.template( $('#'+id).html() );
+            //if( typeof id !== "undefined" )return _.template( $('#'+id).html() );
         };
+        
+        $('.form-control').tooltip();
     })();
 });
