@@ -43,7 +43,7 @@
 			@yield('content')
 		</div>
 	</div>
-	<script data-main="scripts/app.js" src="scripts/vendors/require.js"></script>
+	<script data-main="js/app.js" src="js/vendors/require.js"></script>
 	
 	<script>
         $(function(){
