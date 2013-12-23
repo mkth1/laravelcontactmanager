@@ -1,7 +1,8 @@
 laravelcontactmanager
 =====================
 
-*A simple mock-up application of laravel*
+**A simple mock-up application of laravel**
+
   This application uses laravel 4 as back-end, backbone as front-end, require js to optimise and minify js code and   
   bootstrap 3 for css. It also uses toastr for nice validation error.
   
