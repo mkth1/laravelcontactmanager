@@ -3,12 +3,7 @@
 
 @section('content')
 	@if ( $errors->has() )
-		<ul id="form-errors">
-			{{ $errors->first('first_name','<li>:message</li>') }}
-			{{ $errors->first('last_name','<li>:message</li>') }}
-			{{ $errors->first('phone_number','<li>:message</li>') }}
-			{{ $errors->first('email_address','<li>:message</li>') }}
-		</ul>
+		@include('contacts.error')
 	@endif
 	<div class="table-responsive">
 		<table class="table table-condensed  table-bordered text-center">

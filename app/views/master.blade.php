@@ -4,6 +4,7 @@
 	<title> Contacts </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{{ HTML::style('css/vendors/bootstrap.css')}}
+    {{ HTML::style('css/vendors/toastr.css')}}
 	{{ HTML::style('css/main.css')}}
 
 </head>

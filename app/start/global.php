@@ -52,6 +52,7 @@ App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
 
+    /* for error hanndling in prouction make the debug false and uncomment following
 	switch ($code)
     {
         case 403:
@@ -65,7 +66,7 @@ App::error(function(Exception $exception, $code)
 
         default:
             return Response::view('error.default', array(), $code);
-    }
+    } */
 });
 
 /*

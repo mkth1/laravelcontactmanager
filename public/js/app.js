@@ -4,6 +4,7 @@ require.config({
         "underscore":"vendors/underscore",
         "backbone":"vendors/backbone",
         "bootstrap":"vendors/bootstrap",
+        "toastr":"vendors/toastr"
     },
       shim: {
         jquery: {
@@ -15,6 +16,10 @@ require.config({
         bootstrap: {
             deps: ['jquery'],
             exports: 'Bootstrap'
+        },
+        toastr: {
+            deps: ['jquery'],
+            exports: 'toastr'
         },
         backbone: {
             deps: ['underscore', 'jquery'],
