@@ -23,3 +23,20 @@ Route::get('/form', function()
 {
 	return View::make('form');
 });
+
+
+Event::listen('404', function()
+{	
+	return Response::error('404');
+});
+
+Event::listen('500', function()
+{	
+	return Response::error('500');
+});
+
+Event::listen('illuminate.query', function($sql)
+{
+    //var_dump($sql);
+}); 
+

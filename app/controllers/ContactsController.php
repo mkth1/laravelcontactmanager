@@ -123,4 +123,5 @@ class ContactsController extends BaseController {
 		return Redirect::to('/');
 
 	}
+
 }
